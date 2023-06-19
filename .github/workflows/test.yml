@@ -12,8 +12,12 @@ jobs:
         run: ls -alh
       - name: Get fixtures
         run: cd .. && git clone https://github.com/nationalarchives/tna-frontend.git
+      - name: Node version
+        run: node --version
+      - name: Python version
+        run: python --version
       - name: ls
-        run: ls -alh
+        run: ls -alh ..
       - name: ls
         run: ls -alh ..
       - name: ls
