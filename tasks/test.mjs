@@ -8,14 +8,14 @@ console.log("Running tests...");
 
 const fixturesDirectory = `../tna-frontend/src/nationalarchives/components/`;
 
-const components = globSync(`${fixturesDirectory}*/fixtures.json`)
-  .map((componentFixtureFile) =>
+const components = globSync(`${fixturesDirectory}*/fixtures.json`).map(
+  (componentFixtureFile) =>
     componentFixtureFile
       .replace(new RegExp(`^${fixturesDirectory}`), "")
       .replace(new RegExp(/\/fixtures.json$/), "")
-  );
+);
 
-components.forEach(async(component) => {
+components.forEach(async (component) => {
   console.log(`------------------------------------------`);
   console.log(`Component: ${component}`);
   const { fixtures } = JSON.parse(
@@ -28,7 +28,9 @@ components.forEach(async(component) => {
       )}`
     );
     const body = await response.text();
-    const bodyPretty = html_beautify(body.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " "));
+    const bodyPretty = html_beautify(
+      body.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " ")
+    );
     const fixturePretty = html_beautify(
       fixture.html.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " ")
     );
@@ -60,5 +62,3 @@ components.forEach(async(component) => {
     }
   });
 });
-
-exit(0)
