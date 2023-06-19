@@ -23,16 +23,12 @@ components.forEach((component) => {
     fs.readFileSync(`${fixturesDirectory}${component}/fixtures.json`, "utf8")
   );
   fixtures.forEach(async (fixture) => {
-    console.log(`Fixture: ${fixture}`);
-    // console.log(fixture.options)
-    // console.log(objectToQuerystring(fixture.options))
     const response = await fetch(
       `http://127.0.0.1:8080/components/${component}?params=${encodeURIComponent(
         JSON.stringify(fixture.options)
       )}`
     );
     const body = await response.text();
-    console.log(`body: ${body}`);
     const bodyPretty = html_beautify(body.replace(/(\n\s*){1,}/g, ""));
     const fixturePretty = html_beautify(
       fixture.html.replace(/(\n\s*){1,}/g, "")

@@ -8,20 +8,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: ls
-        run: ls -alh
       - name: Get fixtures
         run: cd .. && git clone https://github.com/nationalarchives/tna-frontend.git
-      - name: Node version
-        run: node --version
-      - name: Python version
-        run: python --version
-      - name: ls
-        run: ls -alh ..
-      - name: ls
-        run: ls -alh ..
-      - name: ls
-        run: ls -alh ../tna-frontend/src/nationalarchives/components/
       - name: Set up Python venv
         run: python3 -m venv venv
       - name: Activate venv
@@ -30,13 +18,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run server
         run: python manage.py runserver 8080 &
-      - name: Wait
-        run: sleep 30s
-      - name: ls
-        run: ls -alh
       - name: Install Node dependencies
         run: cd tasks && npm install
-      - name: ls
-        run: ls -alh
       - name: Run the tests
         run: node ./tasks/test.mjs
