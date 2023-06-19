@@ -4,6 +4,8 @@ import { diffChars } from "diff";
 import { globSync } from "glob";
 import { html_beautify } from "js-beautify/js/lib/beautify-html.js";
 
+console.log("Running tests...");
+
 const fixturesDirectory = `../tna-frontend/src/nationalarchives/components/`;
 
 const components = globSync(`${fixturesDirectory}*/fixtures.json`)
@@ -15,6 +17,8 @@ const components = globSync(`${fixturesDirectory}*/fixtures.json`)
   .filter((component) => component === "card");
 
 components.forEach((component) => {
+  console.log(`------------------------------------------`);
+  console.log(`Component: ${component}`);
   const { fixtures } = JSON.parse(
     fs.readFileSync(`${fixturesDirectory}${component}/fixtures.json`, "utf8")
   );

@@ -16,6 +16,8 @@ jobs:
         run: ls -alh
       - name: ls
         run: ls -alh ..
+      - name: ls
+        run: ls -alh ../tna-frontend/src/nationalarchives/components/
       - name: Set up Python venv
         run: python3 -m venv venv
       - name: Activate venv
