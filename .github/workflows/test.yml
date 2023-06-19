@@ -30,6 +30,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run server
         run: python manage.py runserver 8080 &
+      - name: Wait
+        run: sleep 30s
       - name: ls
         run: ls -alh
       - name: Install Node dependencies
