@@ -19,4 +19,4 @@ jobs:
       - name: Run server
         run: python manage.py runserver 8080 &
       - name: Run the tests
-        run: node ./tasks/test.js
+        run: node ./tasks/test.mjs
