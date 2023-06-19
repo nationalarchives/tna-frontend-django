@@ -23,7 +23,7 @@ components.forEach((component) => {
     // console.log(objectToQuerystring(fixture.options))
     const response = await fetch(
       `http://127.0.0.1:8080/components/${component}?params=${encodeURIComponent(
-        fixture.options
+        JSON.stringify(fixture.options)
       )}`
     );
     const body = await response.text();
