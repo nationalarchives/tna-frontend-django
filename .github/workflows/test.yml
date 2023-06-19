@@ -1,0 +1,22 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get fixtures
+        run: git clone https://github.com/nationalarchives/tna-frontend.git
+      - name: Set up Python venv
+        run: python3 -m venv venv
+      - name: Activate venv
+        run: . ./venv/bin/activate
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run server
+        run: python manage.py runserver 8080 &
+      - name: Run the tests
+        run: node ./tasks/test.js
