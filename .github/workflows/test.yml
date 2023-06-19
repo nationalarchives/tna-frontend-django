@@ -18,7 +18,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run server
         run: python manage.py runserver 8080 &
+      - name: PWD
+        run: pwd
       - name: Install the dependencies
         run: cd tasks && npm install
+      - name: PWD
+        run: pwd
       - name: Run the tests
-        run: node ./test.mjs
+        run: node ./tasks/test.mjs
