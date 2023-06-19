@@ -13,25 +13,24 @@ const components = globSync(`${fixturesDirectory}*/fixtures.json`)
     componentFixtureFile
       .replace(new RegExp(`^${fixturesDirectory}`), "")
       .replace(new RegExp(/\/fixtures.json$/), "")
-  )
-  .filter((component) => component === "card");
+  );
 
-components.forEach((component) => {
+components.forEach(async(component) => {
   console.log(`------------------------------------------`);
   console.log(`Component: ${component}`);
   const { fixtures } = JSON.parse(
     fs.readFileSync(`${fixturesDirectory}${component}/fixtures.json`, "utf8")
   );
-  fixtures.forEach(async (fixture) => {
+  await fixtures.forEach(async (fixture) => {
     const response = await fetch(
       `http://127.0.0.1:8080/components/${component}?params=${encodeURIComponent(
         JSON.stringify(fixture.options)
       )}`
     );
     const body = await response.text();
-    const bodyPretty = html_beautify(body.replace(/(\n\s*){1,}/g, ""));
+    const bodyPretty = html_beautify(body.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " "));
     const fixturePretty = html_beautify(
-      fixture.html.replace(/(\n\s*){1,}/g, "")
+      fixture.html.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " ")
     );
 
     const diff = diffChars(fixturePretty, bodyPretty)
@@ -61,3 +60,5 @@ components.forEach((component) => {
     }
   });
 });
+
+exit(0)

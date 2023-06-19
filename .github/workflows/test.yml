@@ -21,4 +21,4 @@ jobs:
       - name: Install Node dependencies
         run: cd tasks && npm install
       - name: Run the tests
-        run: node ./tasks/test.mjs
+        run: node ./tasks/test.mjs || exit 1
