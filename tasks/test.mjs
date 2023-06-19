@@ -4,7 +4,7 @@ import { diffChars } from "diff";
 import { globSync } from "glob";
 import { html_beautify } from "js-beautify/js/lib/beautify-html.js";
 
-const fixturesDirectory = `tna-frontend/src/nationalarchives/components/`;
+const fixturesDirectory = `../tna-frontend/src/nationalarchives/components/`;
 
 const components = globSync(`${fixturesDirectory}*/fixtures.json`)
   .map((componentFixtureFile) =>
