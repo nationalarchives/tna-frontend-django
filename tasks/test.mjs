@@ -5,36 +5,62 @@ import { globSync } from "glob";
 import { html_beautify } from "js-beautify/js/lib/beautify-html.js";
 
 console.log("Running tests...");
-
+const testEndpoint = "http://127.0.0.1:8080/components/";
+const standardiseHtml = (html) =>
+  html_beautify(html.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " "));
 const fixturesDirectory = `../tna-frontend/src/nationalarchives/components/`;
-
-const components = globSync(`${fixturesDirectory}*/fixtures.json`).map(
-  (componentFixtureFile) =>
-    componentFixtureFile
+const components = globSync(`${fixturesDirectory}*/fixtures.json`)
+  .map((componentFixtureFile) => {
+    const name = componentFixtureFile
       .replace(new RegExp(`^${fixturesDirectory}`), "")
-      .replace(new RegExp(/\/fixtures.json$/), "")
-);
+      .replace(new RegExp(/\/fixtures.json$/), "");
+    return {
+      name,
+      testUrl: `${testEndpoint}${name}`,
+      fixtures: [],
+    };
+  })
+  .map((component) => {
+    const { fixtures } = JSON.parse(
+      fs.readFileSync(
+        `${fixturesDirectory}${component.name}/fixtures.json`,
+        "utf8"
+      )
+    );
+    return {
+      ...component,
+      fixtures,
+    };
+  });
 
-components.forEach(async (component) => {
+for (let i = 0; i < components.length; i++) {
+  const component = components[i];
   console.log(`------------------------------------------`);
-  console.log(`Component: ${component}`);
+  console.log(`Component: ${component.name}`);
   const { fixtures } = JSON.parse(
-    fs.readFileSync(`${fixturesDirectory}${component}/fixtures.json`, "utf8")
+    fs.readFileSync(
+      `${fixturesDirectory}${component.name}/fixtures.json`,
+      "utf8"
+    )
   );
-  await fixtures.forEach(async (fixture) => {
+
+  for (let j = 0; j < component.fixtures.length; j++) {
+    const fixture = component.fixtures[j];
     const response = await fetch(
-      `http://127.0.0.1:8080/components/${component}?params=${encodeURIComponent(
+      `${component.testUrl}?params=${encodeURIComponent(
         JSON.stringify(fixture.options)
       )}`
-    );
+    )
+      .then((response) => {
+        if (response.status >= 400 && response.status < 600) {
+          throw new Error("Bad response from server");
+        }
+        return response;
+      })
+      .catch((e) => console.error(e));
     const body = await response.text();
-    const bodyPretty = html_beautify(
-      body.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " ")
-    );
-    const fixturePretty = html_beautify(
-      fixture.html.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " ")
-    );
-
+    const bodyPretty = standardiseHtml(body);
+    const fixturePretty = standardiseHtml(fixture.html);
     const diff = diffChars(fixturePretty, bodyPretty)
       .map(
         (part) =>
@@ -43,7 +69,6 @@ components.forEach(async (component) => {
           }`
       )
       .join("");
-
     const mismatch = bodyPretty !== fixturePretty;
     if (mismatch) {
       console.error(`  🔴 [FAIL] ${fixture.name}\n`);
@@ -60,5 +85,5 @@ components.forEach(async (component) => {
     } else {
       console.log(`  🟢 [PASS] ${fixture.name}`);
     }
-  });
-});
+  }
+}

@@ -1,4 +1,4 @@
-<{{ params.htmlElement|default:"div" }} class="tna-card {{ params.classes }}" {% for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+<{{ params.htmlElement|default:"div" }} class="tna-card {{ params.classes }}" {% for attribute, value in params.attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
     <hgroup class="tna-card__heading tna-hgroup">
     {% if params.supertitle %}
         <p class="tna-card__supertitle tna-hgroup__supertitle">{{ params.supertitle }}</p>
