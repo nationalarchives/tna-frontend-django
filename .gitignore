@@ -1,5 +1,7 @@
 .DS_Store
 .vscode
-venv
+*.egg-info
+dist
 node_modules
+venv
 __pycache__

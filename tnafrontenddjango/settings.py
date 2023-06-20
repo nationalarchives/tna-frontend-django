@@ -56,7 +56,7 @@ ROOT_URLCONF = "tnafrontenddjango.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "nationalarchives-frontend-django/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

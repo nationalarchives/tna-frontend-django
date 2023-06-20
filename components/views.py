@@ -16,25 +16,6 @@ def button(request, *args, **kwargs):
 
 def card(request, *args, **kwargs):
     template = loader.get_template("components/card.html")
-    # params = {
-    #     "supertitle": "Card supertitle",
-    #     "title": "Card title",
-    #     "href": "#",
-    #     "image": {
-    #         "src": "https://loremflickr.com/640/360",
-    #         "alt": "A placeholder image",
-    #     },
-    #     "body": "<p>Card body</p>",
-    #     "actions": [
-    #         {
-    #         "text": "Card action",
-    #         "href": "#",
-    #         "title": "Go and do the action",
-    #         },
-    #     ],
-    #     "htmlElement": "article",
-    #     "classes": "tna-card--demo"
-    # }
     params = request.GET.get('params')
     context = {
         "params": json.loads(params) if params else {}
@@ -50,7 +31,7 @@ def footer(request, *args, **kwargs):
     return HttpResponse(template.render(context, request))
 
 def grid(request, *args, **kwargs):
-    template = loader.get_template("components/grid.html")
+    template = loader.get_template("utilities/grid.html")
     params = request.GET.get('params')
     context = {
         "params": json.loads(params) if params else {}
