@@ -7,7 +7,17 @@ import { html_beautify } from "js-beautify/js/lib/beautify-html.js";
 console.log("Running tests...");
 const testEndpoint = "http://127.0.0.1:8080/components/";
 const standardiseHtml = (html) =>
-  html_beautify(html.replace(/(\n\s*){1,}/g, "").replace(/\s{2,}/g, " "));
+  html_beautify(
+    html
+      .replace(/(\n\s*){1,}/g, "")
+      .replace(/\s{2,}/g, " ")
+      .replace(/(\w+)="([^"]*)\s+"/g, '$1="$2"')
+      .replace(/(\w+)="\s+([^"]*)"/g, '$1="$2"'),
+    {
+      "wrap-attributes": "force",
+      "preserve-newlines": false,
+    }
+  );
 const fixturesDirectory = `../tna-frontend/src/nationalarchives/components/`;
 const components = globSync(`${fixturesDirectory}*/fixtures.json`)
   .map((componentFixtureFile) => {
@@ -61,14 +71,6 @@ for (let i = 0; i < components.length; i++) {
     const body = await response.text();
     const bodyPretty = standardiseHtml(body);
     const fixturePretty = standardiseHtml(fixture.html);
-    const diff = diffChars(fixturePretty, bodyPretty)
-      .map(
-        (part) =>
-          `${part.added ? "\x1b[32m" : part.removed ? "\x1b[31m" : "\x1b[0m"}${
-            part.value
-          }`
-      )
-      .join("");
     const mismatch = bodyPretty !== fixturePretty;
     if (mismatch) {
       console.error(`  🔴 [FAIL] ${fixture.name}\n`);
@@ -77,7 +79,7 @@ for (let i = 0; i < components.length; i++) {
           (part) =>
             `${
               part.added ? "\x1b[32m" : part.removed ? "\x1b[31m" : "\x1b[0m"
-            }${part.value}`
+            }${part.value === " " ? "█" : part.value}`
         )
         .join("");
       console.log(diff);
