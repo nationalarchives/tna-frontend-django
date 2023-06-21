@@ -25,10 +25,9 @@ setuptools.setup(
         "Topic :: Software Development :: User Interfaces",
         "Topic :: Text Processing :: Markup :: HTML",
     ],
-    packages=setuptools.find_packages(exclude=["tnafrontenddjango", "components"]),
+    packages=setuptools.find_packages(exclude=["django", "components"]),
     package_data={
         "nationalarchives-frontend-django.templates.components": ["*.html"],
-        "nationalarchives-frontend-django.templates.utilities": ["*.html"],
     },
     python_requires=">=3.8",
     install_requires=["Django>=4"],

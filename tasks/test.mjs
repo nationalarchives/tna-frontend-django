@@ -5,7 +5,7 @@ import { globSync } from "glob";
 import { html_beautify } from "js-beautify/js/lib/beautify-html.js";
 
 console.log("Running tests...");
-const testEndpoint = "http://127.0.0.1:8080/components/";
+const testEndpoint = "http://127.0.0.1:8080/";
 const standardiseHtml = (html) =>
   html_beautify(
     html

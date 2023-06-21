@@ -1,31 +1,31 @@
-<{{ params.htmlElement|default:"div" }} class="tna-card {{ params.classes }}" {% for attribute, value in params.attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
+<{{ htmlElement|default:"div" }} class="tna-card {{ classes }}" {% for attribute, value in attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
     <hgroup class="tna-card__heading tna-hgroup">
-    {% if params.supertitle %}
-        <p class="tna-card__supertitle tna-hgroup__supertitle">{{ params.supertitle }}</p>
+    {% if supertitle %}
+        <p class="tna-card__supertitle tna-hgroup__supertitle">{{ supertitle }}</p>
     {% endif %}
         <h1 class="tna-card__title tna-hgroup__title">
-        {% if params.href %}
-            <a href="{{ params.href }}" class="tna-card__title-link">{{ params.title }}</a>
+        {% if href %}
+            <a href="{{ href }}" class="tna-card__title-link">{{ title }}</a>
         {% else %}
-            {{ params.title }}
+            {{ title }}
         {% endif %}
         </h1>
     </hgroup>
-    {% if params.image %}
-    <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" class="tna-card__image" />
+    {% if image %}
+    <img src="{{ image.src }}" alt="{{ image.alt }}" class="tna-card__image" />
     {% endif %}
     <div class="tna-card__body">
-    {% if params.text %}
-        <p>{{ params.text }}</p>
+    {% if text %}
+        <p>{{ text }}</p>
     {% else %}
-        {{ params.body | safe }}
+        {{ body | safe }}
     {% endif %}
     </div>
-    {% if params.actions %}
+    {% if actions %}
     <div class="tna-card__actions">
-    {% for item in params.actions %}
+    {% for item in actions %}
         <a href="{{ item.href }}" class="tna-card__action tna-button" {% if item.title %}title="{{ item.title }}"{% endif %}>{{ item.text }}</a>
     {% endfor %}
     </div>
     {% endif %}
-</{{ params.htmlElement|default:"div" }}>
+</{{ htmlElement|default:"div" }}>

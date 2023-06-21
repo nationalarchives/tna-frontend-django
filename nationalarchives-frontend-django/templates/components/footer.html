@@ -1,7 +1,7 @@
-<footer class="tna-footer {{ params.classes }}" {% for attribute, value in params.attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
-    {% if params.navigation %}
+<footer class="tna-footer {{ classes }}" {% for attribute, value in attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
+    {% if navigation %}
     <div class="tna-container tna-footer__navigation">
-    {% for group in params.navigation %}
+    {% for group in navigation %}
         <div class="tna-column tna-column--flex-1 tna-footer__navigation-group">
             <h4 class="tna-footer__navigation-group-title">{{ group.title }}</h4>
             <ul class="tna-footer__navigation-group-items">
@@ -15,9 +15,9 @@
     {% endfor %}
     </div>
     {% endif %}
-    {% if params.social %}
+    {% if social %}
     <div class="tna-container tna-footer__social">
-    {% for item in params.social %}
+    {% for item in social %}
         <div class="tna-column tna-column--flex-1 tna-footer__social-item">
             <a href="{{ item.href }}" class="tna-footer__social-item-link tna-footer__link" {% if item.title %}title="{{ item.title }}"{% endif %}>{{ item.text }}</a>
         </div>

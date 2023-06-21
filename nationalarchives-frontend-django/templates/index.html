@@ -1,0 +1,13 @@
+<html class="tna-template">
+    <head>
+        <title>The National Archives Frontend Django Templates</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'nationalarchives/all.css' %}">
+    </head>
+    <body class="tna-template__body">
+        <h1 class="tna-heading tna-heading--xl">Hello world</h1>
+        {% include "components/button.html" with text="I am a button" href="#" %}
+        {% include "components/card.html" with title="I am a card" %}
+        {% include "components/footer.html" %}
+    </body>
+</html>
