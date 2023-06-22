@@ -20,9 +20,9 @@ node tasks/test.mjs
 http://localhost:8080/components/
 
 ```sh
-flake8 . --max-complexity=10 --max-line-length=120
 isort .
 black .
+flake8 . --max-complexity=10 --max-line-length=120
 ```
 
 ```sh
