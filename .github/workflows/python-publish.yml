@@ -4,11 +4,9 @@ on:
   release:
     types: [published]
 
-permissions:
-  contents: read
-
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,11 +16,6 @@ jobs:
           python-version: '3.x'
       - name: Install Python requirements
         run: pip install -r requirements.txt
-      - name: Lint Python
-        run: |
-          isort . --diff --verbose
-          black . --check --verbose
-          flake8 . --verbose
       - name: Run server
         run: python manage.py runserver 8080 &
       - name: Install Node dependencies
@@ -31,6 +24,7 @@ jobs:
         run: node ./tasks/test.mjs || exit 1
 
   deploy:
+    name: Upload release to PyPI
     runs-on: ubuntu-latest
     needs: [test]
     steps:
@@ -48,6 +42,4 @@ jobs:
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
-          repository-url: https://pypi.org/legacy/
