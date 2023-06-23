@@ -14,13 +14,13 @@ jobs:
         run: python3 -m venv venv
       - name: Activate venv
         run: . ./venv/bin/activate
+      - name: Install Python requirements
+        run: pip install -r requirements.txt
       - name: Lint Python
         run: |
           isort . --diff --verbose
           black . --check --verbose
           flake8 . --verbose
-      - name: Install Python requirements
-        run: pip install -r requirements.txt
       - name: Run server
         run: python manage.py runserver 8080 &
       - name: Install Node dependencies
