@@ -17,18 +17,13 @@ python manage.py runserver 8080
 node tasks/test.mjs
 ```
 
-http://localhost:8080/components/
-
-```sh
-isort .
-black .
-flake8 . --max-complexity=10 --max-line-length=120
-```
+http://localhost:8080/
 
 ```sh
 python3 -m build
 python3 -m pip install --upgrade twine
-python3 -m twine upload --repository testpypi dist/*
+# python3 -m twine upload --repository testpypi dist/*
+python3 -m twine upload dist/*
 ```
 
 ## How to use in your own Django project
