@@ -8,12 +8,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+
       - name: Get fixtures
         run: cd .. && git clone https://github.com/nationalarchives/tna-frontend.git
-      - name: Set up Python venv
-        run: python3 -m venv venv
-      - name: Activate venv
-        run: . ./venv/bin/activate
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Lint Python
