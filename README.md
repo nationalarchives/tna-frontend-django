@@ -20,6 +20,8 @@ node tasks/test.mjs
 http://localhost:8080/
 
 ```sh
+git tag v0.1.0
+git push origin --tags
 python3 -m build
 python3 -m pip install --upgrade twine
 # python3 -m twine upload --repository testpypi dist/*
