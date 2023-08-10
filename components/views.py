@@ -113,4 +113,3 @@ def tabs(request, *args, **kwargs):
     params = request.GET.get("params")
     context = {"params": json.loads(params) if params else {}}
     return HttpResponse(template.render(context, request))
-
