@@ -9,24 +9,33 @@
 Django templates implementation of [TNA components](https://github.com/nationalarchives/tna-frontend) for inclusion in Python applications.
 
 ```sh
+# Create a virtual environment
 python3 -m venv venv
 . ./venv/bin/activate
+
+# Install the dependencies
 pip install -r requirements.txt
 npm install
+
+# Run the server
 python manage.py runserver 8080
-node tasks/test.mjs
 ```
 
 http://localhost:8080/
 
 ```sh
-git tag v0.1.0
-git push origin --tags
+# Run the tests against the running server
+node tasks/test.mjs
+```
+
+<!--
+```sh
 python3 -m build
 python3 -m pip install --upgrade twine
 # python3 -m twine upload --repository testpypi dist/*
 python3 -m twine upload dist/*
 ```
+-->
 
 ## How to use in your own Django project
 

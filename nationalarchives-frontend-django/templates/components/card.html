@@ -1,4 +1,4 @@
-<{{ params.htmlElement|default:"div" }} class="tna-card{% if params.featured %} tna-card--featured{% endif %} {{ params.classes }}" {% for attribute, value in params.attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
+<{{ params.htmlElement|default:"div" }} class="tna-card{% if params.featured %} tna-card--featured{% endif %} {{ params.classes }}" data-module="tna-card" {% for attribute, value in params.attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
     <div class="tna-card__inner">
     {% if params.heading.supertitle %}
         {% if params.heading.singleSentence %}
@@ -35,7 +35,7 @@
     {% endif %}
     {% if params.image %}
         <div class="tna-card__image-container">
-            <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" class="tna-card__image" />
+            <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" width="{{ params.image.width }}" height="{{ params.image.height }}" class="tna-card__image" />
         </div>
     {% endif %}
         <div class="tna-card__body">

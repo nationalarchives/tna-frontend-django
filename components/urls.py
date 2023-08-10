@@ -4,9 +4,19 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("breadcrumbs", views.breadcrumbs),
     path("button", views.button),
     path("card", views.card),
+    path("filters", views.filters),
     path("footer", views.footer),
     path("grid", views.grid),
+    path("header", views.header),
+    path("hero", views.hero),
+    path("index-grid", views.indexGrid),
+    path("message", views.messsage),
+    path("phase-banner", views.phaseBanner),
+    path("picture", views.picture),
+    path("profile", views.profile),
     path("sensitive-image", views.sensitiveImage),
+    path("tabs", views.tabs),
 ]
