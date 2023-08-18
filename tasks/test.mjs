@@ -74,7 +74,7 @@ for (let i = 0; i < components.length; i++) {
     const mismatch = bodyPretty !== fixturePretty;
     if (mismatch) {
       console.error(`  🔴 [FAIL] ${fixture.name}\n`);
-      const diff = diffChars(fixturePretty, bodyPretty)
+      const diff = diffChars(bodyPretty, fixturePretty)
         .map(
           (part) =>
             `${

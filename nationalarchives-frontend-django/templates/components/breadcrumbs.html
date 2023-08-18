@@ -1,9 +1,9 @@
-<div class="tna-breadcrumbs tna-container ">
-  <nav class="tna-column tna-column--full" aria-label="Breadcrumb">
-    <ol class="tna-breadcrumbs__list">
+<div class="tna-breadcrumbs tna-container" data-module="tna-breadcrumbs">
+  <nav class="tna-breadcrumbs__wrapper tna-column tna-column--full" aria-label="Breadcrumb">
+    <ol class="tna-breadcrumbs__list tna-breadcrumbs__list--collapse-on-mobile">
       {% for item in params.items %}
       <li class="tna-breadcrumbs__item">
-        <a href="{{ item.href }}" class="tna-breadcrumbs__link" data-prefix="Back to">
+        <a href="{{ item.href }}" class="tna-breadcrumbs__link">
           {{ item.text }}
         </a>
       </li>

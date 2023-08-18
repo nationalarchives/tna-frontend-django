@@ -1,12 +1,12 @@
 # The National Archives Frontend Django Templates
 
-[![Main build status](https://github.com/nationalarchives/tna-frontend-django/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/nationalarchives/tna-frontend-django/actions/workflows/ci.yml?query=branch%3Amain)
+[![Main build status](https://img.shields.io/github/actions/workflow/status/nationalarchives/tna-frontend-django/ci.yml?style=flat-square&event=push&branch=main)](https://github.com/nationalarchives/tna-frontend-django/actions/workflows/ci.yml?query=branch%3Amain)
 [![Latest release](https://img.shields.io/github/v/release/nationalarchives/tna-frontend-django?style=flat-square&logo=github&logoColor=white&sort=semver)](https://github.com/nationalarchives/tna-frontend-django/releases)
 [![PyPi version](https://img.shields.io/pypi/v/nationalarchives-frontend-django?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/nationalarchives-frontend-django/)
 ![Python version](https://img.shields.io/pypi/pyversions/nationalarchives-frontend-django?style=flat-square&logo=python&logoColor=white)
 [![Licence](https://img.shields.io/github/license/nationalarchives/tna-frontend-django?style=flat-square)](https://github.com/nationalarchives/tna-frontend-django/blob/main/LICENCE)
 
-Django templates implementation of [TNA components](https://github.com/nationalarchives/tna-frontend) for inclusion in Python applications.
+Django templates implementation of [TNA components](https://github.com/nationalarchives/tna-frontend) for inclusion in Python Django applications.
 
 ```sh
 # Create a virtual environment
