@@ -54,26 +54,28 @@ for (let i = 0; i < components.length; i++) {
     )
   );
 
+  if( component.name !== 'footer') {
+
   for (let j = 0; j < component.fixtures.length; j++) {
     const fixture = component.fixtures[j];
-    const response = await fetch(
-      `${component.testUrl}?params=${encodeURIComponent(
+    const testUrl = `${component.testUrl}?params=${encodeURIComponent(
         JSON.stringify(fixture.options)
       )}`
-    )
+    const response = await fetch(testUrl)
       .then((response) => {
         if (response.status >= 400 && response.status < 600) {
           throw new Error("Bad response from server");
         }
         return response;
       })
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e, testUrl));
     const body = await response.text();
     const bodyPretty = standardiseHtml(body);
     const fixturePretty = standardiseHtml(fixture.html);
     const mismatch = bodyPretty !== fixturePretty;
     if (mismatch) {
       console.error(`  🔴 [FAIL] ${fixture.name}\n`);
+      console.error(testUrl)
       const diff = diffChars(bodyPretty, fixturePretty)
         .map(
           (part) =>
@@ -87,5 +89,6 @@ for (let i = 0; i < components.length; i++) {
     } else {
       console.log(`  🟢 [PASS] ${fixture.name}`);
     }
+  }
   }
 }

@@ -1,33 +1,43 @@
-<header class="tna-hero {{ params.classes }}" {% for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-  <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" class="tna-hero__image" width="{{ params.image.width }}" height="{{ params.image.height }}">
-  {% if params.image.information %}
-  <details class="tna-hero__image-details">
-    <summary class="tna-hero__image-details-summary">
-      <span class="tna-hero__image-details-summary-icon">I</span>nformation about this image
-    </summary>
-    <div class="tna-hero__image-information">
-      <p>{{ params.image.information }}</p>
-    </div>
-  </details>
-  {% endif %}
-  <div class="tna-container tna-hero__inner">
-    <div class="tna-column tna-column--width-2-3 tna-column--full-small tna-column--full-tiny tna-hero__content">
-      <div class="tna-hero__content-inner">
-        {% if params.heading %}
-        <h1 class="tna-heading tna-heading--xl tna-hero__heading">
-          {{ params.heading }}
-        </h1>
-        {% endif %}
-        {% if params.text %}
-        <div class="tna-hero__body">
-          <p>{{ params.text }}</p>
+<{{ heading | yesno:'header,div' }} class="tna-hero {{ classes }}" {% for attribute, value in attributes.items %} {{ attribute }}="{{ value }}"{% endfor %}>
+  <figure class="tna-hero__figure">
+    {% if imageCaption %}
+    <figcaption class="tna-hero__caption">
+      <details class="tna-hero__details">
+        <summary class="tna-hero__details-summary">
+          <span class="tna-hero__details-summary-icon">I</span>mage caption
+        </summary>
+        <div class="tna-hero__information">
+          <p>{{ imageCaption }}</p>
         </div>
-        {% elif params.body %}
-        <div class="tna-hero__body">
-          {{ params.body | safe }}
-        </div>
+      </details>
+    </figcaption>
+    {% endif %}
+    <picture class="tna-hero__image">
+      {% if imageSources %}
+      {% for source in imageSources %}
+      <source srcset="{{ source.src }}" type="{{ source.type }}" width="{{ source.width | default:imageWidth }}" height="{{ source.height | default:imageHeight }}"{% if source.media %} media="{{ source.media }}"{% endif %}>
+      {% endfor %}
+      <source srcset="{{ imageSrc }}" type="{{ imageType | default:'image/jpeg' }}" width="{{ imageWidth }}" height="{{ imageHeight }}">
+      {% endif %}
+      <img src="{{ imageSrc }}" alt="{{ imageAlt }}" width="{{ imageWidth }}" height="{{ imageHeight }}">
+    </picture>
+    {% if heading %}
+    <div class="tna-container tna-hero__inner">
+      <div class="tna-column tna-column--width-2-3 tna-column--full-small tna-column--full-tiny tna-hero__content">
+        <div class="tna-hero__content-inner">
+        {% if heading %}
+          <h1 class="tna-heading-xl tna-hero__heading">
+            {{ heading }}
+          </h1>
         {% endif %}
+        {% if text %}
+          <p>{{ text }}</p>
+        {% elif body %}
+          {{ body | safe }}
+        {% endif %}
+        </div>
       </div>
     </div>
-  </div>
-</header>
+    {% endif %}
+  </figure>
+</{{ heading | yesno:'header,div' }}>
