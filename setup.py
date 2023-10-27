@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="nationalarchives-frontend-django",
-    version="0.1.1-alpha",
+    version="0.1.2-alpha",
     author="Andrew Hosgood",
     author_email="andrew.hosgood@nationalarchives.gov.uk",
     description="The National Archives frontend Django templates",
